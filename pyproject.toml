@@ -1,7 +1,7 @@
 [project]
-name = "establishments-lakehouse"
+name = "template-pipeline"
 version = "0.1.0"
-description = "PySpark pipeline for processing establishment data on the data platform."
+description = "Reusable PySpark pipeline template for execution on the data platform."
 requires-python = ">=3.10,<3.11"
 dependencies = []
 
