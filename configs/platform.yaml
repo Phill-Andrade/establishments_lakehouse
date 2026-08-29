@@ -1,0 +1,31 @@
+contract_version: 1
+
+platform:
+  execution:
+    cluster_manager: yarn
+    deploy_mode: cluster
+
+  container:
+    base_image: hadoop_platform
+    network: data_platform_network
+
+  runtime:
+    hadoop_conf_dir: /opt/hadoop/etc/hadoop
+    spark_home: /opt/spark
+    spark_defaults_file: /opt/spark/conf/spark-defaults.conf
+    python_executable: /usr/bin/python3
+
+  configuration:
+    required_files:
+      - core-site.xml
+      - hdfs-site.xml
+      - yarn-site.xml
+      - hive-site.xml
+
+  service_discovery:
+    hdfs: core-site.xml
+    yarn: yarn-site.xml
+    hive_metastore: hive-site.xml
+
+  storage:
+    curated_base_path: hdfs:///data/curated
