@@ -1,8 +1,8 @@
-# Template Pipeline
+# Establishments Lakehouse
 
-Template code-first para engenheiros de dados criarem pipelines PySpark independentes, executados no YARN da plataforma e orquestrados pelo Airflow.
+Pipeline PySpark code-first para engenheiros de dados processarem dados de estabelecimentos no YARN da plataforma, com orquestração pelo Airflow.
 
-> Status: estrutura code-first em construção. O ciclo de vida da `SparkSession` está implementado; os demais módulos serão adicionados com comportamento testável.
+> Status: fundação do projeto em construção. O ciclo de vida da `SparkSession` está implementado; a conectividade com a plataforma, o CI/CD e o ETL serão adicionados incrementalmente com comportamento testável.
 
 ---
 
@@ -60,9 +60,9 @@ A suíte atual valida criação, normalização do nome, encerramento e falhas d
 
 ### Casos de uso suportados
 
-- **Criar um pipeline independente a partir do template**
-  - Entrada: cópia deste repositório e implementação das responsabilidades específicas do pipeline.
-  - Saída: repositório versionado e imagem de container próprios para o novo pipeline.
+- **Desenvolver o pipeline de estabelecimentos**
+  - Entrada: contratos de origem, regras de qualidade e regras de transformação definidos incrementalmente.
+  - Saída: código versionado e imagem de container próprios para o pipeline.
 
 - **Executar processamento PySpark na plataforma de dados**
   - Entrada: código code-first do pipeline e parâmetros fornecidos pela orquestração.
@@ -72,13 +72,13 @@ A suíte atual valida criação, normalização do nome, encerramento e falhas d
   - Entrada: imagem versionada do pipeline e parâmetros dinâmicos da execução.
   - Saída: submissão acompanhada pelo Airflow e aplicação executada no YARN.
 
-Cada repositório criado a partir deste template representa um pipeline implantável de forma independente. A coordenação entre pipelines pertence ao Airflow, não ao código de outro pipeline.
+Este repositório representa um pipeline implantável de forma independente. A coordenação com outros pipelines pertence ao Airflow, não ao código deste pipeline.
 
 ---
 
 ## Arquitetura
 
-O template ocupa a camada de execução entre o Airflow e a plataforma de dados:
+O projeto ocupa a camada de execução entre o Airflow e a plataforma de dados:
 
 ```text
 Airflow
@@ -120,7 +120,7 @@ Uma nova tabela utiliza a mesma estrutura de módulos e define somente suas font
 
 ### Estratégia de configuração
 
-O template segue code-first:
+O projeto segue code-first:
 
 - regras de transformação e Data Quality ficam em código Python;
 - configurações estáveis do cluster permanecem no `spark-defaults.conf` da plataforma;
@@ -142,7 +142,7 @@ A árvore abaixo representa a arquitetura-alvo. Módulos planejados não serão 
 ├── docker/
 │   └── Dockerfile
 ├── src/
-│   └── template_pipeline/
+│   └── establishments_lakehouse/
 │       ├── __init__.py
 │       ├── main.py
 │       ├── settings.py
