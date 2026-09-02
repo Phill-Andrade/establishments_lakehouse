@@ -27,7 +27,7 @@ Pipeline PySpark code-first para engenheiros de dados processarem dados de estab
 - Poetry para instalar e validar as dependências do projeto.
 - Docker para construir e executar a imagem do pipeline.
 - Imagem local `hadoop_platform` fornecida pela plataforma de dados.
-- Rede Docker `data_platform_network` criada pela plataforma.
+- Rede Docker `data-platform-network` criada pela plataforma.
 - Serviços HDFS, YARN e Hive Metastore disponíveis.
 
 As versões e dependências Python são mantidas em [`pyproject.toml`](pyproject.toml) e [`poetry.lock`](poetry.lock).
@@ -38,6 +38,17 @@ Com o ambiente virtual ativado:
 
 ```bash
 poetry install
+```
+
+### Build da imagem
+
+Para construir a imagem local do pipeline:
+
+```bash
+docker build \
+  --file docker/Dockerfile \
+  --tag establishments-lakehouse:local \
+  .
 ```
 
 ### Execução mínima
@@ -53,6 +64,8 @@ poetry run pytest -s
 ```
 
 A suíte atual valida criação, normalização do nome, encerramento e falhas do ciclo de vida da `SparkSession`.
+
+O smoke de integração em `tests/integration/pipeline_smoke.py` valida a imagem do pipeline como consumidora da plataforma. As validações pertencentes à infraestrutura estão especificadas em [`docs/platform_smoke_tests.md`](docs/platform_smoke_tests.md) para serem mantidas no repositório da plataforma.
 
 ---
 
