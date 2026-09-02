@@ -7,7 +7,7 @@ platform:
 
   container:
     base_image: hadoop_platform
-    network: data_platform_network
+    network: data-platform-network
 
   runtime:
     hadoop_conf_dir: /opt/hadoop/etc/hadoop
@@ -16,6 +16,8 @@ platform:
     python_executable: /usr/bin/python3
 
   configuration:
+    required_settings:
+      spark.sql.catalogImplementation: hive
     required_files:
       - core-site.xml
       - hdfs-site.xml

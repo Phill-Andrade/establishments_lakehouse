@@ -4,6 +4,12 @@ WORKDIR /opt/pipeline
 
 ENV PYTHONPATH=/opt/pipeline/src
 
-COPY pyproject.toml poetry.lock /opt/pipeline/
-COPY configs/ /opt/pipeline/configs/
 COPY src/ /opt/pipeline/src/
+
+WORKDIR /opt/pipeline/src
+
+RUN /usr/bin/python3 -m zipfile -c \
+    /opt/pipeline/establishments_lakehouse.zip \
+    establishments_lakehouse
+
+WORKDIR /opt/pipeline
