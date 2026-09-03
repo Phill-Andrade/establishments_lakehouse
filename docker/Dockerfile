@@ -1,4 +1,6 @@
-FROM hadoop_platform
+ARG PLATFORM_IMAGE=hadoop_platform
+
+FROM ${PLATFORM_IMAGE}
 
 WORKDIR /opt/pipeline
 
